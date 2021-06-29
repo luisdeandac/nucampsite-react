@@ -42,6 +42,7 @@ function CampsiteInfo(props){
                             <RenderCampsite campsite={props.campsite} />
                             <RenderComments comments={props.campsite.comments} />
                             <RenderComments author={props.campsite.author} />
+                            <RenderComments comments={props.comments} />
                         </div>
                     </div>
                 )
