@@ -9,7 +9,7 @@ import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mappropsToProps = state => {
+const mapStateToProps = state => {
     return {
         campsites: state.campsites,
         comments: state.comments,
@@ -56,4 +56,4 @@ class Main extends Component {
     }
 }
 
-export default withRouter(connect(mappropsToProps)(Main));
+export default withRouter(connect(mapStateToProps)(Main));
