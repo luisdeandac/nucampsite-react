@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
+import React, { Component, useState } from 'react';
+import { Card, CardImg, CardText, CardBody, CardImgOverlay, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
         Label, Col, Row} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import CardTitle from 'reactstrap/lib/CardTitle';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+import { Fade, Stagger } from 'react-animation-components';
+import { useSpring, a } from '@react-spring/web'
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -151,20 +152,21 @@ class CommentForm extends Component {
 
 
 function RenderCampsite({campsite}){
+    const [flipped, set] = useState(false)
+    const { transform, opacity } = useSpring({
+        opacity: flipped ? 1 : 0,
+        transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+        config: { mass: 5, tension: 500, friction: 80 },
+      })
     return(
-        <div className="col-md-5 m-1">
-            <FadeTransform
-                in transformProps={{
-                    exitTransform: 'scale(0.5) translateY(-50%)'
-                }}>
-                <Card>
-                    <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
-                    <CardBody>
-                        <CardTitle>{campsite.name}</CardTitle>
-                        <CardText>{campsite.description}</CardText>
-                    </CardBody>
-                </Card>
-            </FadeTransform>
+        <div className="col-md-5 m-1"  onClick={() => set(state => !state)}>
+                <a.div style={{ opacity: opacity.to(o => 1 - o), transform }}>
+                    <img className="col m-1" src={baseUrl + campsite.image} alt={campsite.name} width="450px"/>
+                </a.div>
+                <a.div  style={{opacity, transform, rotateX: '180deg'}}>
+                    <h3>{campsite.name} </h3>
+                    <p>{campsite.description}</p>
+                </a.div>
         </div>
     )
 }
