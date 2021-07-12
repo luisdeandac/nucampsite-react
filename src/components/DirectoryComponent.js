@@ -16,7 +16,7 @@ function RenderDirectoryItem({campsite}){
         </Card>
     );
 }
-    
+
 function Directory (props){
     const directory = props.campsites.campsites.map(campsite => {
         return (

@@ -1,9 +1,8 @@
 import React, { Component, useState } from 'react';
-import { Card, CardImg, CardText, CardBody, CardImgOverlay, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
+import { Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader,
         Label, Col, Row} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import CardTitle from 'reactstrap/lib/CardTitle';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import { Fade, Stagger } from 'react-animation-components';
